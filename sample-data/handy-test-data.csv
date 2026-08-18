@@ -1,0 +1,6 @@
+Scenario,Username,Password,Email,Phone,First Name,Last Name,Address,City,PIN,Card Number,Expiry,CVV
+Valid login,qa.user.01,Test@12345,qa.user.01@example.test,9876543210,Asha,Verma,14 MG Road,Bengaluru,560001,4111111111111111,12/28,123
+Invalid password,qa.user.01,WrongPass!,qa.user.01@example.test,9876543210,Asha,Verma,14 MG Road,Bengaluru,560001,4111111111111111,12/28,123
+New registration,qa.new.user,Welcome@2026,qa.new.user@example.test,9123456780,Rohan,Mehta,88 Park Street,Kolkata,700016,5555555555554444,03/29,456
+Missing phone,qa.nophone,PhoneLess#1,qa.nophone@example.test,,Neha,Kapoor,5 Residency Road,Pune,411001,4000000000000002,08/27,789
+International address,qa.intl.user,Travel@987,qa.intl.user@example.test,+44 7700 900123,James,Wright,221B Baker Street,London,NW1 6XE,4012888888881881,11/30,321

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; style-src 'self'; script-src 'self'; img-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Handy Test Data</title>
+    <link rel="stylesheet" href="sidepanel.css" />
+  </head>
+  <body>
+    <div class="top-chrome">
+      <header class="app-header">
+        <img class="app-icon" src="icons/icon48.png" width="36" height="36" alt="" />
+        <div class="header-copy">
+          <h1>Handy Test Data</h1>
+          <p id="header-blurb">Paste a table. Click a value to copy.</p>
+        </div>
+        <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Matching Chrome. Switch to dark mode">
+          Chrome
+        </button>
+        <button type="button" id="settings-toggle" class="theme-toggle" aria-label="Open settings">
+          Settings
+        </button>
+      </header>
+
+      <div id="mode-switch" class="mode-switch" role="group" aria-label="Mode">
+        <button type="button" id="mode-use" class="mode-btn active" aria-pressed="true">Use</button>
+        <button type="button" id="mode-scrap" class="mode-btn" aria-pressed="false">Scrap</button>
+      </div>
+    </div>
+
+    <div class="panel-body">
+      <div id="use-mode">
+        <section class="paste-card" aria-label="Excel table">
+          <button
+            type="button"
+            id="paste-toggle"
+            class="accordion-toggle"
+            aria-expanded="true"
+            aria-controls="paste-panel"
+          >
+            <span>Excel table</span>
+            <span class="chevron" aria-hidden="true"></span>
+          </button>
+          <div id="paste-panel" class="accordion-panel">
+            <label class="visually-hidden" for="paste-input">Paste Excel table</label>
+            <textarea
+              id="paste-input"
+              rows="5"
+              spellcheck="false"
+              autocomplete="off"
+              placeholder="Paste Excel or Sheets cells here. First row is the header."
+            ></textarea>
+            <div class="actions">
+              <button id="load-btn" type="button" class="primary">Load</button>
+              <button id="clear-btn" type="button" class="ghost">Clear</button>
+            </div>
+            <p id="status-message" class="status" role="status" aria-live="polite"></p>
+          </div>
+        </section>
+
+        <section id="results" class="results hidden" aria-label="Test data">
+          <label class="field-label" for="row-select">Test data set</label>
+          <select id="row-select"></select>
+          <p id="row-subtitle" class="subtitle"></p>
+          <div id="fields" class="fields"></div>
+        </section>
+
+        <p id="empty-state" class="empty-state">
+          Copy header + data rows from Excel, paste them above, then click Load.
+        </p>
+      </div>
+
+      <div id="scrap-mode" class="hidden">
+        <div class="mode-switch scrap-tabs" role="group" aria-label="Scrap type">
+          <button type="button" id="scrap-tab-headered" class="mode-btn active" aria-pressed="true">Headered</button>
+          <button type="button" id="scrap-tab-unorganised" class="mode-btn" aria-pressed="false">Random</button>
+        </div>
+
+        <div id="scrap-headered">
+          <section class="paste-card" aria-label="Header row">
+            <button
+              type="button"
+              id="scrap-header-toggle"
+              class="accordion-toggle"
+              aria-expanded="true"
+              aria-controls="scrap-header-panel"
+            >
+              <span>Header row</span>
+              <span class="chevron" aria-hidden="true"></span>
+            </button>
+            <div id="scrap-header-panel" class="accordion-panel">
+              <label class="visually-hidden" for="scrap-header-input">Paste header row</label>
+              <textarea
+                id="scrap-header-input"
+                rows="2"
+                spellcheck="false"
+                autocomplete="off"
+                placeholder="Paste or type the Excel header row."
+              ></textarea>
+              <div class="actions">
+                <button id="scrap-set-headers" type="button" class="primary">Set headers</button>
+                <button id="scrap-use-headers" type="button" class="ghost">Use table headers</button>
+                <button id="scrap-clear-headers" type="button" class="ghost">Clear headers</button>
+              </div>
+              <p id="scrap-status" class="status" role="status" aria-live="polite"></p>
+            </div>
+          </section>
+
+          <section id="scrap-form" class="results hidden" aria-label="Scrap fields">
+            <div class="row-switch" role="group" aria-label="Scrap rows">
+              <button id="scrap-row-prev" type="button" class="row-nav" aria-label="Previous row">‹</button>
+              <div id="scrap-row-chips" class="row-chips"></div>
+              <button id="scrap-add-row" type="button" class="row-add">+ Row</button>
+              <button id="scrap-row-next" type="button" class="row-nav" aria-label="Next row">›</button>
+            </div>
+            <div id="scrap-fields" class="fields"></div>
+          </section>
+
+          <p id="scrap-empty" class="empty-state">
+            Paste a header row, or use the table headers from Use mode.
+          </p>
+        </div>
+
+        <div id="scrap-unorganised" class="hidden">
+          <p id="unorg-hint" class="empty-state">
+            Select text on a page, then press Alt + Shift + S or use Add selected text below.
+          </p>
+          <div id="unorg-list" class="fields"></div>
+          <div class="unorg-capture">
+            <p class="field-label">Add selected text</p>
+            <div class="actions unorg-actions">
+              <button id="unorg-as-label" type="button" class="ghost">As Label</button>
+              <button id="unorg-as-value-to-last" type="button" class="ghost" disabled>As Value To Last Label</button>
+              <button id="unorg-as-value" type="button" class="ghost">As Value</button>
+            </div>
+          </div>
+          <p id="unorg-status" class="status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <div id="settings-view" class="hidden">
+        <section class="results" aria-label="Chrome color">
+          <p class="field-label">Chrome color</p>
+          <p class="subtitle">
+            Chrome does not share the Appearance color chip with extensions. Pick the same color
+            here when the header is set to Chrome.
+          </p>
+          <div
+            id="chrome-color-chips"
+            class="chrome-color-chips"
+            role="listbox"
+            aria-label="Chrome appearance colors"
+          ></div>
+          <label class="chrome-color-custom">
+            Custom
+            <input id="chrome-color-custom" type="color" value="#8cabe4" />
+          </label>
+        </section>
+        <section class="results" aria-label="Shortcut settings">
+          <p class="field-label">Capture shortcut</p>
+          <p id="shortcut-display" class="shortcut-display">Alt + Shift + S</p>
+          <p class="subtitle">Select text on a website, then press this combo to add it to Random scrap.</p>
+          <div class="actions">
+            <button id="shortcut-record" type="button" class="primary">Record shortcut</button>
+            <button id="shortcut-reset" type="button" class="ghost">Reset</button>
+          </div>
+          <p id="shortcut-status" class="status" role="status" aria-live="polite"></p>
+        </section>
+      </div>
+    </div>
+
+    <div id="scrap-actions" class="sticky-actions hidden">
+      <div id="scrap-capture" class="unorg-capture hidden">
+        <p class="field-label">Add selected text</p>
+        <div id="scrap-capture-actions" class="actions unorg-actions"></div>
+      </div>
+      <label class="copy-option">
+        <input id="scrap-include-header" type="checkbox" />
+        Include Header
+      </label>
+      <div class="actions">
+        <button id="scrap-copy" type="button" class="primary" title="Copy as Excel rows">Copy Row</button>
+        <button id="scrap-clear-values" type="button" class="ghost" title="Clear values in the active row">Clear Row</button>
+        <button id="scrap-clear-all" type="button" class="ghost hidden" title="Delete all rows. Headers stay.">Delete Rows</button>
+      </div>
+    </div>
+
+    <footer class="app-footer">
+      Made with <span class="brain-icon" aria-hidden="true">🧠</span> by Aman Shah
+    </footer>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script src="parser.js"></script>
+    <script src="sidepanel.js"></script>
+  </body>
+</html>

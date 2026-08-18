@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nimbus Checkout — Handy Test Data demo</title>
+    <style>
+      :root {
+        --bg: #eef2f8;
+        --surface: #ffffff;
+        --ink: #111827;
+        --muted: #5b6575;
+        --faint: #8b95a5;
+        --line: #e4e8f0;
+        --accent: #2563eb;
+        --accent-hover: #1d4ed8;
+        --accent-soft: #e8eefc;
+        --ok: #0f766e;
+        --radius: 16px;
+        --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background:
+          radial-gradient(1200px 500px at 10% -10%, #dbe7ff 0%, transparent 55%),
+          radial-gradient(900px 400px at 100% 0%, #f0e9ff 0%, transparent 45%),
+          var(--bg);
+        color: var(--ink);
+        font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      }
+
+      .page {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 28px 20px 48px;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .logo {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: var(--accent);
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+      }
+
+      .brand h1 {
+        margin: 0;
+        font-size: 20px;
+        letter-spacing: -0.03em;
+      }
+
+      .brand p {
+        margin: 2px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .badge {
+        background: var(--accent-soft);
+        color: var(--accent);
+        border-radius: 999px;
+        padding: 7px 12px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 0.9fr 1.1fr;
+        gap: 20px;
+        align-items: start;
+      }
+
+      @media (max-width: 860px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 22px;
+      }
+
+      .card h2 {
+        margin: 0 0 6px;
+        font-size: 18px;
+        letter-spacing: -0.02em;
+      }
+
+      .lead {
+        margin: 0 0 18px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .profile-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .avatar {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #2563eb, #7c3aed);
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+      }
+
+      .scenario {
+        display: inline-block;
+        margin-top: 4px;
+        color: var(--ok);
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      dl {
+        margin: 0;
+        display: grid;
+        gap: 8px;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 10px;
+        padding: 8px 10px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #fbfcfe;
+      }
+
+      dt {
+        color: var(--faint);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        align-self: center;
+      }
+
+      dd {
+        margin: 0;
+        font-weight: 600;
+        word-break: break-word;
+      }
+
+      form {
+        display: grid;
+        gap: 14px;
+      }
+
+      .section-label {
+        margin: 8px 0 0;
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .fields {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .fields .wide {
+        grid-column: 1 / -1;
+      }
+
+      label {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--muted);
+      }
+
+      input {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 10px 12px;
+        font: inherit;
+        color: var(--ink);
+        background: #fff;
+      }
+
+      input:focus {
+        outline: 2px solid var(--accent);
+        outline-offset: 1px;
+        border-color: var(--accent);
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 6px;
+      }
+
+      button {
+        border: 0;
+        border-radius: 10px;
+        padding: 11px 16px;
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .primary {
+        background: var(--accent);
+        color: #fff;
+        flex: 1;
+      }
+
+      .primary:hover {
+        background: var(--accent-hover);
+      }
+
+      .ghost {
+        background: #fff;
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
+
+      footer {
+        margin-top: 28px;
+        text-align: center;
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .hint {
+        margin-top: 14px;
+        padding: 10px 12px;
+        background: var(--accent-soft);
+        color: #1e3a8a;
+        border-radius: 10px;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div class="brand">
+          <div class="logo">N</div>
+          <div>
+            <h1>Nimbus Checkout</h1>
+            <p>Static demo page for Handy Test Data</p>
+          </div>
+        </div>
+        <span class="badge">QA playground</span>
+      </header>
+
+      <div class="grid">
+        <section class="card" aria-label="Account on file">
+          <h2>Account on file</h2>
+          <p class="lead">Labeled values from sample Test Data 1. Select any value to scrap it with Handy Test Data.</p>
+          <div class="profile-head">
+            <div class="avatar">AV</div>
+            <div>
+              <strong>Asha Verma</strong>
+              <div class="scenario">Scenario: Valid login</div>
+            </div>
+          </div>
+          <dl>
+            <div class="row"><dt>Username</dt><dd>qa.user.01</dd></div>
+            <div class="row"><dt>Password</dt><dd>Test@12345</dd></div>
+            <div class="row"><dt>Email</dt><dd>qa.user.01@example.test</dd></div>
+            <div class="row"><dt>Phone</dt><dd>9876543210</dd></div>
+            <div class="row"><dt>First Name</dt><dd>Asha</dd></div>
+            <div class="row"><dt>Last Name</dt><dd>Verma</dd></div>
+            <div class="row"><dt>Address</dt><dd>14 MG Road</dd></div>
+            <div class="row"><dt>City</dt><dd>Bengaluru</dd></div>
+            <div class="row"><dt>PIN</dt><dd>560001</dd></div>
+            <div class="row"><dt>Card Number</dt><dd>4111111111111111</dd></div>
+            <div class="row"><dt>Expiry</dt><dd>12/28</dd></div>
+            <div class="row"><dt>CVV</dt><dd>123</dd></div>
+          </dl>
+        </section>
+
+        <section class="card" aria-label="Checkout form">
+          <h2>Complete checkout</h2>
+          <p class="lead">Empty fields with the same labels as the sample sheet. Copy from Use mode and paste here, or scrap from the card on the left.</p>
+          <form action="#" method="get" onsubmit="event.preventDefault(); this.querySelector('.hint').hidden = false;">
+            <p class="section-label">Sign in</p>
+            <div class="fields">
+              <label>Username <input name="username" id="username" autocomplete="username" /></label>
+              <label>Password <input name="password" id="password" type="password" autocomplete="current-password" /></label>
+            </div>
+
+            <p class="section-label">Customer</p>
+            <div class="fields">
+              <label>First Name <input name="first-name" id="first-name" autocomplete="given-name" /></label>
+              <label>Last Name <input name="last-name" id="last-name" autocomplete="family-name" /></label>
+              <label>Email <input name="email" id="email" type="email" autocomplete="email" /></label>
+              <label>Phone <input name="phone" id="phone" autocomplete="tel" /></label>
+            </div>
+
+            <p class="section-label">Address</p>
+            <div class="fields">
+              <label class="wide">Address <input name="address" id="address" autocomplete="street-address" /></label>
+              <label>City <input name="city" id="city" autocomplete="address-level2" /></label>
+              <label>PIN <input name="pin" id="pin" autocomplete="postal-code" /></label>
+            </div>
+
+            <p class="section-label">Payment</p>
+            <div class="fields">
+              <label class="wide">Card Number <input name="card-number" id="card-number" inputmode="numeric" /></label>
+              <label>Expiry <input name="expiry" id="expiry" placeholder="MM/YY" /></label>
+              <label>CVV <input name="cvv" id="cvv" inputmode="numeric" /></label>
+            </div>
+
+            <div class="actions">
+              <button class="primary" type="submit">Place order</button>
+              <button class="ghost" type="reset">Reset</button>
+            </div>
+            <p class="hint" hidden>Demo only — nothing is submitted. Swap Test Data rows in Handy Test Data and try again.</p>
+          </form>
+        </section>
+      </div>
+
+      <footer>This demo page is for the Handy Test Data Chrome extension by Aman Shah</footer>
+    </div>
+  </body>
+</html>
