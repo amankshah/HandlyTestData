@@ -10,9 +10,9 @@ import zipfile
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-ROOT = Path(__file__).resolve().parent.parent
-ICONS = ROOT / "icons"
-SAMPLE = ROOT / "sample-data"
+REPO = Path(__file__).resolve().parent.parent.parent
+ICONS = REPO / "chrome-extension" / "icons"
+SAMPLE = REPO / "docs-and-samples" / "sample-data"
 
 HEADERS = [
     "Scenario",

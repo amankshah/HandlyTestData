@@ -6,7 +6,12 @@ No login. No cloud. Data stays in Chrome on your computer.
 
 Requires **Chrome 116+**. Developed by **Aman Shah**.
 
-<img src="docs/screenshots/use-mode.png" alt="Handy Test Data Use mode: Test Data 1 Valid login with click-to-copy field cards" width="380" />
+The repo is split into two folders:
+
+- **`chrome-extension`** — the side panel you load unpacked in Chrome
+- **`docs-and-samples`** — screenshots, sample spreadsheet, and the Nimbus Checkout demo page
+
+<img src="docs-and-samples/screenshots/use-mode.png" alt="Handy Test Data Use mode: Test Data 1 Valid login with click-to-copy field cards" width="380" />
 
 ## What it does
 
@@ -22,7 +27,7 @@ You can capture with **sticky buttons**, a **keyboard shortcut**, or the **right
 
 1. Open [chrome://extensions](chrome://extensions).
 2. Turn on **Developer mode**.
-3. **Load unpacked** and select this folder (`HandlyTestData`).
+3. **Load unpacked** and select the `chrome-extension` folder.
 4. Pin **Handy Test Data** and click the icon. The side panel opens next to the current tab.
 
 Reload the extension after code changes, then **refresh the website** you scrape.
@@ -31,11 +36,11 @@ If the shortcut never fires, assign it at [chrome://extensions/shortcuts](chrome
 
 ## Try it in two minutes
 
-1. Open [`sample-data/handy-test-data.csv`](sample-data/handy-test-data.csv) (or the `.xlsx`) in Excel or Sheets.
+1. Open [`docs-and-samples/sample-data/handy-test-data.csv`](docs-and-samples/sample-data/handy-test-data.csv) (or the `.xlsx`) in Excel or Sheets.
 2. Copy the **header row plus the data rows**.
 3. In the panel, stay on **Use**, paste into **Excel table**, click **Load**.
 4. Choose **Test Data 1**. Click **Username** (`qa.user.01`) — it is copied.
-5. Optional demo site: serve this repo and open `/demo/` (see [Demo page](#demo-page)).
+5. Optional demo site: serve `docs-and-samples` and open `/demo/` (see [Demo page](#demo-page)).
 
 The first pasted row is always the header. Later rows become Test Data 1, 2, 3, …
 
@@ -45,7 +50,7 @@ The first pasted row is always the header. Later rows become Test Data 1, 2, 3, 
 
 Use this when the spreadsheet already exists.
 
-<img src="docs/screenshots/use-mode.png" alt="Use mode with Valid login test data cards" width="380" />
+<img src="docs-and-samples/screenshots/use-mode.png" alt="Use mode with Valid login test data cards" width="380" />
 
 1. Paste header + rows from Excel or Google Sheets.
 2. Pick a set from **Test data set** (Test Data 1 is “Valid login” in the sample).
@@ -61,7 +66,7 @@ The header button cycles **Dark → Light → Chrome**. **Chrome** follows the b
 
 Use this when you already know the column names (often the same headers as Use mode).
 
-<img src="docs/screenshots/headered-scrap.png" alt="Headered scrap with R1 row, field inputs, and Add selected text buttons" width="380" />
+<img src="docs-and-samples/screenshots/headered-scrap.png" alt="Headered scrap with R1 row, field inputs, and Add selected text buttons" width="380" />
 
 ### Set headers
 
@@ -102,7 +107,7 @@ The keyboard shortcut writes into the **first** of those buttons.
 
 Use this when you are collecting bits of text and will name columns as you go.
 
-<img src="docs/screenshots/random-scrap.png" alt="Random scrap with label and value cards and As Label / As Value buttons" width="380" />
+<img src="docs-and-samples/screenshots/random-scrap.png" alt="Random scrap with label and value cards and As Label / As Value buttons" width="380" />
 
 1. Select text on the page.
 2. **As Label** — new card, text in Label.
@@ -121,7 +126,7 @@ Works on `http://` and `https://` pages. Not on `chrome://`, the Chrome Web Stor
 
 ### Right-click menu
 
-<img src="docs/screenshots/context-menu.png" alt="Nimbus Checkout demo with Handy Test Data context menu Add to Headered row" width="720" />
+<img src="docs-and-samples/screenshots/context-menu.png" alt="Nimbus Checkout demo with Handy Test Data context menu Add to Headered row" width="720" />
 
 1. Select text on the page (the demo highlights a word such as “sample”).
 2. Right-click → **Handy Test Data**:
@@ -133,7 +138,7 @@ The screenshot shows the **Nimbus Checkout** demo beside Headered scrap: labeled
 
 ### Keyboard shortcut
 
-<img src="docs/screenshots/settings.png" alt="Settings screen to record or reset the capture shortcut" width="380" />
+<img src="docs-and-samples/screenshots/settings.png" alt="Settings screen to record or reset the capture shortcut" width="380" />
 
 Default suggested key is **Alt + Shift + S** (Windows/Linux) or **Option + Shift + S** (Mac). Chrome may not assign it until you set it under **Settings** or `chrome://extensions/shortcuts`.
 
@@ -146,11 +151,12 @@ The screenshot shows a recorded combo (**Shift + Cmd + O**). Use **Record shortc
 
 ## Demo page
 
-[`demo/index.html`](demo/index.html) is a static checkout page built from the sample sheet: Username, Password, Email, Phone, First Name, Last Name, Address, City, PIN, Card Number, Expiry, CVV.
+[`docs-and-samples/demo/index.html`](docs-and-samples/demo/index.html) is a static checkout page built from the sample sheet: Username, Password, Email, Phone, First Name, Last Name, Address, City, PIN, Card Number, Expiry, CVV.
 
 Serve it over HTTP (the extension cannot capture from `file://`):
 
 ```bash
+cd docs-and-samples
 python3 -m http.server 8000
 ```
 
@@ -183,15 +189,18 @@ Nothing is uploaded. Tables and scrap rows are stored in Chrome **local** storag
 
 ```
 HandlyTestData/
-  manifest.json
-  sidepanel.html / .js / .css
-  background.js          shortcut, menus, capture
-  content.js             page selection
-  parser.js              Excel TSV
-  demo/index.html        static Nimbus Checkout playground
-  sample-data/           handy-test-data.csv / .xlsx
-  docs/screenshots/      README images
-  icons/
+  chrome-extension/              load this folder in Chrome
+    manifest.json
+    sidepanel.html / .js / .css
+    background.js                shortcut, menus, capture
+    content.js                   page selection
+    parser.js                    Excel TSV
+    icons/
+  docs-and-samples/
+    screenshots/                 README images
+    sample-data/                 handy-test-data.csv / .xlsx
+    demo/index.html              static Nimbus Checkout playground
+    scripts/generate_assets.py   icons and sample workbook
 ```
 
 Made with a brain by **Aman Shah**.
